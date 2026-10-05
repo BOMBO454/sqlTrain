@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --paper: #f3ecdf;
+  --ink: #1c1915;
+  --card: #fffaf2;
+  --muted: #6d655c;
+  --line: #1c1915;
+  --amber: #e07a2f;
+  --teal: #0f6e68;
+  --danger: #9f2d2d;
+  --ok: #1f7a46;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #141210;
+  --ink: #f3ecdf;
+  --card: #211d18;
+  --muted: #b7ad9f;
+  --line: #f3ecdf;
+  --amber: #e08a3c;
+  --teal: #3ec4b8;
+  --danger: #ff8d7a;
+  --ok: #8ed7a8;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-display: "Cormorant Garamond", "Source Serif 4", serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-amber: var(--amber);
+  --color-teal: var(--teal);
+  --color-danger: var(--danger);
+  --color-ok: var(--ok);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  opacity: 0.45;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 31px,
+    color-mix(in oklab, var(--ink) 7%, transparent) 32px
+  );
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--amber) 55%, white);
+  color: #1c1915;
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
